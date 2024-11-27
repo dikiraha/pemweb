@@ -25,13 +25,15 @@ if(isset($_POST['submit'])) {
                 header('Location: ./../profile.php');
             }
         } else {
-            echo "password salah";
-            die;
+            $_SESSION['error'] = 'Password salah.';
+            header('Location: ./../index.php');
+            exit();
         }
 
     } else {
-        echo "email atau password salah";
-        die;
+        $_SESSION['error'] = 'Email atau password salah.';
+        header('Location: ./../index.php');
+        exit();
     }
 }
 ?>

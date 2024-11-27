@@ -14,14 +14,16 @@ if(isset($_POST['submit'])) {
     $confirm = $_POST['confirm'];
 
     if($confirm != $password) {
-        echo "password tidak sesuai dengan konfirmasi password";
-        die;
+        $_SESSION['error'] = 'Password tidak sesuai dengan konfirmasi password.';
+        header('Location: ./../register.php');
+        exit();
     }
 
     $usedEmail = mysqli_query($db_connect,"SELECT email FROM users WHERE email = '$email'");
     if(mysqli_num_rows($usedEmail) > 0) {
-        echo "email sudah digunakan";
-        die;
+        $_SESSION['error'] = 'Email sudah digunakan.';
+        header('Location: ./../register.php');
+        exit();
     }
 
     $password = password_hash($password,PASSWORD_DEFAULT);
